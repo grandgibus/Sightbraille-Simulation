@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+canvas {
+    width: 100%;
+    height: 100%
+}
+
+h1 {
+    font-family: "Roboto mono";
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#top-overlay {
+    position: absolute;
+    margin-left: 25px;
+    top: 0px;
+}
+
+#3d-view {
+    
+}
+
+
+#console-section {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 25vw;
+}
+
+#send-button {
+    margin-top: 10px;
+}
+
+#console-input {
+    width: 100%;
+}
+
+.mdc-text-field__input {
+    width: 100% !important;
+    min-height: 50px;
+}
+
+#console-input > textarea {
+    font-family: 'Roboto Mono';
+    font-weight: bolder;
+}
+
+.mdc-text-field.text-field.mdc-text-field--textarea{
+/*     background-color: white; */
+}
+
+.mdc-floating-label--float-above{
+    color: #000000 !important;
+}
+:root {
+    --mdc-theme-primary: #000000 !important;
+    --mdc-theme-secondary: #000000 !important;
+}
