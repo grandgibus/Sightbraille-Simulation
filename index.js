@@ -85,8 +85,8 @@ const STEPS_Y_FROM_HOMING = (DISTANCE_Y_OFFSET_ORIGIN) / DISTANCE_PER_STEP_Y;
 
 const SOLENOID_TRIGGER_TIME = 200;
 
-const NUMBER_OF_LINES = 50;
-const NUMBER_OF_COLUMNS = 25;
+const NUMBER_OF_LINES = 27 * 3;
+const NUMBER_OF_COLUMNS = 28 * 2;
 
 const NO_POINT = false;
 const POINT = true;
@@ -309,21 +309,24 @@ function checkForPrintRequest() {
                 var instruction = serialStack.shift();
                 if (instruction == "BEGIN_LINE") {
 
+                    if (line >= NUMBER_OF_LINES) {
+                        break;
+                    }
+                    
                     var point = serialStack.shift();
                     while (point != "STOP_LINE") {
                         var xPos = parseInt(point);
                         if (xPos >= NUMBER_OF_COLUMNS) {
-                            break;
+                            point = serialStack.shift();
+                            continue;
                         }
                         totalAmountOfPoints++;
                         data[line][xPos] = POINT;
 
                         point = serialStack.shift();
                     }
+
                     line++;
-                    if (line >= NUMBER_OF_LINES) {
-                        break;
-                    }
 
                 } else if (instruction == "END_OF_PRINT") {
                     startPrint();
@@ -344,7 +347,7 @@ function getStepsFromPointX(x) {
 
 function getStepsFromPointY(y) {
     let charOffset = ((y - y % 3) / 3 * 10.0) / DISTANCE_PER_STEP_Y;
-    let pointOffset = y % 3 != 0 ? (2.5) / DISTANCE_PER_STEP_Y : 0;
+    let pointOffset = (y % 3) * (2.5) / DISTANCE_PER_STEP_Y;
     return parseInt(charOffset + pointOffset);
 }
 
